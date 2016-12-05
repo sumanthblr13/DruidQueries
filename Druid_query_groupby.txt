@@ -1,0 +1,57 @@
+{
+    "jsonClass" : "GroupByQuerySpec",
+    "queryType" : "groupBy",
+    "dataSource" : "tpch",
+    "dimensions" : [ {
+      "jsonClass" : "DefaultDimensionSpec",
+      "type" : "default",
+      "dimension" : "l_returnflag",
+      "outputName" : "f"
+    }, {
+      "jsonClass" : "DefaultDimensionSpec",
+      "type" : "default",
+      "dimension" : "l_linestatus",
+      "outputName" : "s"
+    } ],
+    "granularity" : "all",
+    "filter" : {
+      "jsonClass" : "LogicalFilterSpec",
+      "type" : "or",
+      "fields" : [ {
+        "jsonClass" : "LogicalFilterSpec",
+        "type" : "and",
+        "fields" : [ {
+          "jsonClass" : "SelectorFilterSpec",
+          "type" : "selector",
+          "dimension" : "s_nation",
+          "value" : "FRANCE"
+        }, {
+          "jsonClass" : "SelectorFilterSpec",
+          "type" : "selector",
+          "dimension" : "c_nation",
+          "value" : "GERMANY"
+        } ]
+      }, {
+        "jsonClass" : "LogicalFilterSpec",
+        "type" : "and",
+        "fields" : [ {
+          "jsonClass" : "SelectorFilterSpec",
+          "type" : "selector",
+          "dimension" : "c_nation",
+          "value" : "FRANCE"
+        }, {
+          "jsonClass" : "SelectorFilterSpec",
+          "type" : "selector",
+          "dimension" : "s_nation",
+          "value" : "GERMANY"
+        } ]
+      } ]
+    },
+    "aggregations" : [ {
+      "jsonClass" : "FunctionAggregationSpec",
+      "type" : "count",
+      "name" : "alias-1",
+      "fieldName" : "count"
+    } ],
+    "intervals" : [ "1992-12-31T16:00:00.000-08:00/1997-09-02T01:00:00.001-07:00" ]
+  }
